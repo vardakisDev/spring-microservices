@@ -1,1 +1,2 @@
 com.interview.commonsecurity.CommonSecurityAutoConfiguration
+com.interview.commonsecurity.CommonLocalJwtAutoConfiguration

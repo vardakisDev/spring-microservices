@@ -1,6 +1,7 @@
 package com.interview.cartservice.infrastructure.web;
 
 import com.interview.commonsecurity.CommonSecurityAutoConfiguration;
+import com.interview.commonsecurity.CommonLocalJwtAutoConfiguration;
 import com.interview.cartservice.application.port.out.CartRepositoryPort;
 import com.interview.cartservice.application.port.out.ProductCatalogPort;
 import com.interview.cartservice.application.port.out.PurchaseRepositoryPort;
@@ -43,7 +44,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CartController.class)
-@Import({CommonSecurityAutoConfiguration.class, LocalJwtSecurityConfiguration.class, CartSecurityTest.StubUseCaseConfiguration.class})
+@Import({CommonSecurityAutoConfiguration.class, CommonLocalJwtAutoConfiguration.class, LocalJwtSecurityConfiguration.class, CartSecurityTest.StubUseCaseConfiguration.class})
 class CartSecurityTest {
 
     @Autowired
