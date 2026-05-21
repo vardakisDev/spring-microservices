@@ -1,0 +1,282 @@
+openapi: 3.0.3
+info:
+  title: Product Service API
+  version: 1.0.0
+  description: API-first contract for product-service ownership of catalog products and pricing.
+servers:
+  - url: https://product-service.shopping-platform.example
+    description: Primary HTTPS product-service endpoint used for contract review and security audit.
+tags:
+  - name: Products
+    description: Product management operations.
+security:
+  - BearerAuth: []
+paths:
+  /products:
+    get:
+      tags: [Products]
+      operationId: listProducts
+      summary: List products
+      description: Returns all products available in the catalog.
+      responses:
+        '200':
+          description: Products retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductCollectionResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+    post:
+      tags: [Products]
+      operationId: createProduct
+      summary: Create product
+      description: Creates a product that can be added to shopping carts.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+      responses:
+        '201':
+          description: Product created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+  /products/{productId}:
+    parameters:
+      - $ref: '#/components/parameters/ProductId'
+    get:
+      tags: [Products]
+      operationId: getProduct
+      summary: Get product
+      description: Retrieves a single product by identifier.
+      responses:
+        '200':
+          description: Product retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+    put:
+      tags: [Products]
+      operationId: updateProduct
+      summary: Update product
+      description: Updates mutable product fields.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProductRequest'
+      responses:
+        '200':
+          description: Product updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+    delete:
+      tags: [Products]
+      operationId: deleteProduct
+      summary: Delete product
+      description: Deletes a product from the catalog.
+      responses:
+        '204':
+          description: Product deleted successfully.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token used to authenticate API requests.
+  parameters:
+    ProductId:
+      name: productId
+      in: path
+      required: true
+      description: Unique identifier of the product.
+      schema:
+        type: string
+        format: uuid
+  responses:
+    BadRequestResponse:
+      description: The request was invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnauthorizedResponse:
+      description: Authentication is required or the bearer token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ForbiddenResponse:
+      description: The authenticated principal is not allowed to perform this action.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFoundResponse:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ConflictResponse:
+      description: The request conflicts with the current state of the target resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    CreateProductRequest:
+      type: object
+      additionalProperties: false
+      required: [name, description, price]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 150
+          description: Product display name.
+        description:
+          type: string
+          minLength: 1
+          maxLength: 1000
+          description: Human readable product description.
+        price:
+          type: number
+          minimum: 0.01
+          maximum: 1000000
+          multipleOf: 0.01
+          description: Product unit price in euro.
+    UpdateProductRequest:
+      type: object
+      additionalProperties: false
+      required: [name, description, price]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 150
+          description: Product display name.
+        description:
+          type: string
+          minLength: 1
+          maxLength: 1000
+          description: Human readable product description.
+        price:
+          type: number
+          minimum: 0.01
+          maximum: 1000000
+          multipleOf: 0.01
+          description: Product unit price in euro.
+    ProductResponse:
+      type: object
+      additionalProperties: false
+      required: [id, name, description, price, currency, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the product.
+        name:
+          type: string
+          description: Product display name.
+        description:
+          type: string
+          description: Human readable product description.
+        price:
+          type: number
+          minimum: 0
+          maximum: 1000000
+          multipleOf: 0.01
+          description: Product unit price in euro.
+        currency:
+          type: string
+          minLength: 3
+          maxLength: 3
+          enum: [EUR]
+          description: Currency used by the service.
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the product was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the product was last updated.
+    ProductCollectionResponse:
+      type: object
+      additionalProperties: false
+      required: [products]
+      properties:
+        products:
+          type: array
+          description: Products in the catalog.
+          minItems: 0
+          maxItems: 10000
+          items:
+            $ref: '#/components/schemas/ProductResponse'
+    ErrorResponse:
+      type: object
+      additionalProperties: false
+      required: [code, message, timestamp]
+      properties:
+        code:
+          type: string
+          minLength: 3
+          maxLength: 100
+          description: Stable application-specific error code.
+        message:
+          type: string
+          minLength: 1
+          maxLength: 500
+          description: Human readable explanation of the error.
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the error was generated.

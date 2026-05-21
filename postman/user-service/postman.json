@@ -1,0 +1,282 @@
+{
+	"info": {
+		"name": "User Service API",
+		"description": {
+		    "content": "API-first contract for user-service ownership of user data and VIP eligibility.",
+		    "type": "text/markdown"
+		},
+		"version": "1.0.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+	        {
+	            "name": "Users",
+	            "item": [
+	                        {
+    "name": "/users",
+                "description": "Creates a user that can own carts and may be eligible for VIP carts.",
+                 "item": [
+                            {
+                                "name": "Create user",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Content-Type",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "{\n \"email\": \"<string>\",\n \"firstName\": \"<string>\",\n \"lastName\": \"<string>\",\n \"vip\": \"<string>\"\n}",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/users",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "users"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": "Creates a user that can own carts and may be eligible for VIP carts."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/users",
+                "description": "Returns all users currently registered in the system.",
+                 "item": [
+                            {
+                                "name": "List users",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/users",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "users"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": "Returns all users currently registered in the system."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/users/:userId",
+                "description": "Deletes a user when no business constraint prevents it.",
+                 "item": [
+                            {
+                                "name": "Delete user",
+                                "request": {
+    "method": "DELETE",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/users/:userId",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "users",
+        ":userId"
+    ],
+    "variable": [
+        {
+        "key": "userId",
+        "value": "",
+        "description": "Unique identifier of the user."
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": "Deletes a user when no business constraint prevents it."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/users/:userId",
+                "description": "Retrieves a single user by identifier.",
+                 "item": [
+                            {
+                                "name": "Get user",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/users/:userId",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "users",
+        ":userId"
+    ],
+    "variable": [
+        {
+        "key": "userId",
+        "value": "",
+        "description": "Unique identifier of the user."
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": "Retrieves a single user by identifier."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/users/:userId",
+                "description": "Updates mutable user fields including VIP status.",
+                 "item": [
+                            {
+                                "name": "Update user",
+                                "request": {
+    "method": "PUT",
+    "header": [
+        {
+        "key": "Content-Type",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "{\n \"email\": \"<string>\",\n \"firstName\": \"<string>\",\n \"lastName\": \"<string>\",\n \"vip\": \"<string>\"\n}",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/users/:userId",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "users",
+        ":userId"
+    ],
+    "variable": [
+        {
+        "key": "userId",
+        "value": "",
+        "description": "Unique identifier of the user."
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": "Updates mutable user fields including VIP status."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        }
+	                    ]
+	        }
+    ],
+    
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://user-service.shopping-platform.example",
+			"type": "string"
+        }
+	]
+}
+

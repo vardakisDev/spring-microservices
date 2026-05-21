@@ -1,0 +1,34 @@
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Build output
+target/
+**/target/
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.*
+
+# Sonar
+.scannerwork/
+.sonar/
+
+# OpenAPI/Postman generator metadata
+postman/**/.openapi-generator/
+postman/**/.openapi-generator-ignore
+
+# OS / temp files
+*.swp
+*.swo
+*~
+
+# Local runtime artifacts
+postgres-data/

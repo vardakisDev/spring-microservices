@@ -1,0 +1,282 @@
+{
+	"info": {
+		"name": "Product Service API",
+		"description": {
+		    "content": "API-first contract for product-service ownership of catalog products and pricing.",
+		    "type": "text/markdown"
+		},
+		"version": "1.0.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+	        {
+	            "name": "Products",
+	            "item": [
+	                        {
+    "name": "/products",
+                "description": "Creates a product that can be added to shopping carts.",
+                 "item": [
+                            {
+                                "name": "Create product",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Content-Type",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "{\n \"name\": \"<string>\",\n \"description\": \"<string>\",\n \"price\": \"<number>\"\n}",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/products",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "products"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": "Creates a product that can be added to shopping carts."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/products",
+                "description": "Returns all products available in the catalog.",
+                 "item": [
+                            {
+                                "name": "List products",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/products",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "products"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": "Returns all products available in the catalog."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/products/:productId",
+                "description": "Deletes a product from the catalog.",
+                 "item": [
+                            {
+                                "name": "Delete product",
+                                "request": {
+    "method": "DELETE",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/products/:productId",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "products",
+        ":productId"
+    ],
+    "variable": [
+        {
+        "key": "productId",
+        "value": "",
+        "description": "Unique identifier of the product."
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": "Deletes a product from the catalog."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/products/:productId",
+                "description": "Retrieves a single product by identifier.",
+                 "item": [
+                            {
+                                "name": "Get product",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/products/:productId",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "products",
+        ":productId"
+    ],
+    "variable": [
+        {
+        "key": "productId",
+        "value": "",
+        "description": "Unique identifier of the product."
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": "Retrieves a single product by identifier."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/products/:productId",
+                "description": "Updates mutable product fields.",
+                 "item": [
+                            {
+                                "name": "Update product",
+                                "request": {
+    "method": "PUT",
+    "header": [
+        {
+        "key": "Content-Type",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "{\n \"name\": \"<string>\",\n \"description\": \"<string>\",\n \"price\": \"<number>\"\n}",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/products/:productId",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "products",
+        ":productId"
+    ],
+    "variable": [
+        {
+        "key": "productId",
+        "value": "",
+        "description": "Unique identifier of the product."
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": "Updates mutable product fields."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        }
+	                    ]
+	        }
+    ],
+    
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://product-service.shopping-platform.example",
+			"type": "string"
+        }
+	]
+}
+

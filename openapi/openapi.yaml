@@ -1,0 +1,521 @@
+openapi: 3.0.3
+info:
+  title: Cart Service API
+  version: 1.0.0
+  description: >-
+    API-first contract for the cart-service. This remains the primary assessment
+    contract and owns cart lifecycle, checkout, and purchase-history queries.
+servers:
+  - url: https://cart-service.shopping-platform.example
+    description: Primary HTTPS cart-service endpoint used for contract review and security audit.
+tags:
+  - name: Carts
+    description: Shopping cart lifecycle and checkout operations.
+  - name: PurchaseHistory
+    description: Purchase history queries owned by cart-service.
+security:
+  - BearerAuth: []
+paths:
+  /carts:
+    post:
+      tags: [Carts]
+      operationId: createCart
+      summary: Create cart
+      description: >-
+        Creates a shopping cart for a user. VIP carts are only allowed for users
+        whose vip flag is true at the time of cart creation. The selected cart type
+        is persisted on the cart and cannot change later.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCartRequest'
+      responses:
+        '201':
+          description: Cart created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+  /carts/{cartId}:
+    parameters:
+      - $ref: '#/components/parameters/CartId'
+    get:
+      tags: [Carts]
+      operationId: getCart
+      summary: Get cart
+      description: Retrieves the current cart state, including pricing summary.
+      responses:
+        '200':
+          description: Cart retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+    delete:
+      tags: [Carts]
+      operationId: deleteCart
+      summary: Delete cart
+      description: Deletes a cart that has not been checked out.
+      responses:
+        '204':
+          description: Cart deleted successfully.
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+  /carts/{cartId}/items:
+    parameters:
+      - $ref: '#/components/parameters/CartId'
+    post:
+      tags: [Carts]
+      operationId: addCartItem
+      summary: Add product to cart
+      description: Adds a product to a cart or increases its quantity.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCartItemRequest'
+      responses:
+        '200':
+          description: Cart updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+  /carts/{cartId}/items/{productId}:
+    parameters:
+      - $ref: '#/components/parameters/CartId'
+      - name: productId
+        in: path
+        required: true
+        description: Unique identifier of the product.
+        schema:
+          type: string
+          format: uuid
+      - name: quantity
+        in: query
+        required: false
+        description: Quantity to remove. Defaults to one unit when omitted.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 999
+    delete:
+      tags: [Carts]
+      operationId: removeCartItem
+      summary: Remove product from cart
+      description: Removes quantity from a cart line item or deletes the line entirely.
+      responses:
+        '200':
+          description: Cart updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CartResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+  /carts/{cartId}/checkout:
+    parameters:
+      - $ref: '#/components/parameters/CartId'
+    post:
+      tags: [Carts]
+      operationId: checkoutCart
+      summary: Checkout cart
+      description: Finalizes a cart and persists its contents in the user's purchase history.
+      responses:
+        '200':
+          description: Cart checked out successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+  /users/{userId}/purchases/top-expensive-products:
+    parameters:
+      - $ref: '#/components/parameters/UserId'
+    get:
+      tags: [PurchaseHistory]
+      operationId: getTopPurchasedProducts
+      summary: Get top four expensive purchased products
+      description: >-
+        Returns up to four distinct products with the highest unit prices from the
+        given user's historical purchases, ordered from most to least expensive.
+      responses:
+        '200':
+          description: Purchased products retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopPurchasedProductsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token used to authenticate API requests.
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      description: Unique identifier of the user.
+      schema:
+        type: string
+        format: uuid
+    CartId:
+      name: cartId
+      in: path
+      required: true
+      description: Unique identifier of the cart.
+      schema:
+        type: string
+        format: uuid
+  responses:
+    BadRequestResponse:
+      description: The request was invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnauthorizedResponse:
+      description: Authentication is required or the bearer token is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ForbiddenResponse:
+      description: The authenticated principal is not allowed to perform this action.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFoundResponse:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ConflictResponse:
+      description: The request conflicts with the current state of the target resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    CreateCartRequest:
+      type: object
+      additionalProperties: false
+      required: [userId, cartType]
+      properties:
+        userId:
+          type: string
+          format: uuid
+          description: Identifier of the user who owns the cart.
+        cartType:
+          $ref: '#/components/schemas/CartType'
+    AddCartItemRequest:
+      type: object
+      additionalProperties: false
+      required: [productId, quantity]
+      properties:
+        productId:
+          type: string
+          format: uuid
+          description: Identifier of the product to add.
+        quantity:
+          type: integer
+          minimum: 1
+          maximum: 999
+          description: Quantity of the product to add.
+    CartType:
+      type: string
+      description: Immutable cart classification assigned at creation time.
+      enum: [NORMAL, VIP]
+    CartStatus:
+      type: string
+      description: Current lifecycle state of the cart.
+      enum: [OPEN, CHECKED_OUT]
+    CartItemResponse:
+      type: object
+      additionalProperties: false
+      required: [productId, productName, unitPrice, quantity, lineTotal]
+      properties:
+        productId:
+          type: string
+          format: uuid
+          description: Identifier of the product.
+        productName:
+          type: string
+          minLength: 1
+          maxLength: 150
+          description: Product name at the time the cart is viewed.
+        unitPrice:
+          type: number
+          minimum: 0
+          maximum: 1000000
+          multipleOf: 0.01
+          description: Unit price in euro.
+        quantity:
+          type: integer
+          minimum: 1
+          maximum: 999
+          description: Quantity currently in the cart.
+        lineTotal:
+          type: number
+          minimum: 0
+          maximum: 100000000
+          multipleOf: 0.01
+          description: Total price for the line before cart-level discounts.
+    PricingSummary:
+      type: object
+      additionalProperties: false
+      required: [subtotal, discountAmount, totalAmount, totalQuantity]
+      properties:
+        subtotal:
+          type: number
+          minimum: 0
+          maximum: 100000000
+          multipleOf: 0.01
+          description: Total cart amount before discounts.
+        discountAmount:
+          type: number
+          minimum: 0
+          maximum: 100000000
+          multipleOf: 0.01
+          description: Total discount amount applied to the cart.
+        totalAmount:
+          type: number
+          minimum: 0
+          maximum: 100000000
+          multipleOf: 0.01
+          description: Amount due after discounts are applied.
+        totalQuantity:
+          type: integer
+          minimum: 0
+          maximum: 100000
+          description: Sum of item quantities in the cart.
+    CartResponse:
+      type: object
+      additionalProperties: false
+      required: [id, userId, cartType, status, items, pricing, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the cart.
+        userId:
+          type: string
+          format: uuid
+          description: Identifier of the cart owner.
+        cartType:
+          $ref: '#/components/schemas/CartType'
+        status:
+          $ref: '#/components/schemas/CartStatus'
+        items:
+          type: array
+          description: Current cart lines.
+          minItems: 0
+          maxItems: 10000
+          items:
+            $ref: '#/components/schemas/CartItemResponse'
+        pricing:
+          $ref: '#/components/schemas/PricingSummary'
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the cart was created.
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the cart was last updated.
+    CheckoutItemResponse:
+      type: object
+      additionalProperties: false
+      required: [productId, productName, unitPrice, quantity, lineTotal]
+      properties:
+        productId:
+          type: string
+          format: uuid
+          description: Identifier of the purchased product.
+        productName:
+          type: string
+          minLength: 1
+          maxLength: 150
+          description: Product name at checkout time.
+        unitPrice:
+          type: number
+          minimum: 0
+          maximum: 1000000
+          multipleOf: 0.01
+          description: Unit price at checkout time.
+        quantity:
+          type: integer
+          minimum: 1
+          maximum: 999
+          description: Quantity purchased.
+        lineTotal:
+          type: number
+          minimum: 0
+          maximum: 100000000
+          multipleOf: 0.01
+          description: Line total before cart-level discounts.
+    CheckoutResponse:
+      type: object
+      additionalProperties: false
+      required: [purchaseId, cartId, userId, cartType, totalAmount, checkedOutAt, items]
+      properties:
+        purchaseId:
+          type: string
+          format: uuid
+          description: Unique identifier of the persisted purchase.
+        cartId:
+          type: string
+          format: uuid
+          description: Identifier of the checked out cart.
+        userId:
+          type: string
+          format: uuid
+          description: Identifier of the purchasing user.
+        cartType:
+          $ref: '#/components/schemas/CartType'
+        totalAmount:
+          type: number
+          minimum: 0
+          maximum: 100000000
+          multipleOf: 0.01
+          description: Final total paid after discounts.
+        checkedOutAt:
+          type: string
+          format: date-time
+          description: Timestamp when the checkout completed.
+        items:
+          type: array
+          description: Purchased items.
+          minItems: 1
+          maxItems: 10000
+          items:
+            $ref: '#/components/schemas/CheckoutItemResponse'
+    PurchasedProductSummary:
+      type: object
+      additionalProperties: false
+      required: [productId, productName, unitPrice, purchaseCount]
+      properties:
+        productId:
+          type: string
+          format: uuid
+          description: Identifier of the product.
+        productName:
+          type: string
+          minLength: 1
+          maxLength: 150
+          description: Product name recorded in purchase history.
+        unitPrice:
+          type: number
+          minimum: 0
+          maximum: 1000000
+          multipleOf: 0.01
+          description: Highest recorded unit price for the product in purchase history.
+        purchaseCount:
+          type: integer
+          minimum: 1
+          maximum: 100000
+          description: Number of purchases in which this product appears.
+    TopPurchasedProductsResponse:
+      type: object
+      additionalProperties: false
+      required: [userId, products]
+      properties:
+        userId:
+          type: string
+          format: uuid
+          description: Identifier of the user whose purchase history is queried.
+        products:
+          type: array
+          description: Up to four most expensive distinct purchased products.
+          minItems: 0
+          maxItems: 4
+          items:
+            $ref: '#/components/schemas/PurchasedProductSummary'
+    ErrorResponse:
+      type: object
+      additionalProperties: false
+      required: [code, message, timestamp]
+      properties:
+        code:
+          type: string
+          minLength: 3
+          maxLength: 100
+          description: Stable application-specific error code.
+        message:
+          type: string
+          minLength: 1
+          maxLength: 500
+          description: Human readable explanation of the error.
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the error was generated.

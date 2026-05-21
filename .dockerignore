@@ -1,0 +1,10 @@
+.git
+.github
+.idea
+.vscode
+**/.DS_Store
+
+**/target/*
+!services/user-service/target/user-service-0.0.1-SNAPSHOT.jar
+!services/product-service/target/product-service-0.0.1-SNAPSHOT.jar
+!services/cart-service/target/cart-service-0.0.1-SNAPSHOT.jar

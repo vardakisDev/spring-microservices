@@ -1,0 +1,412 @@
+{
+	"info": {
+		"name": "Cart Service API",
+		"description": {
+		    "content": "API-first contract for the cart-service. This remains the primary assessment contract and owns cart lifecycle, checkout, and purchase-history queries.",
+		    "type": "text/markdown"
+		},
+		"version": "1.0.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+	        {
+	            "name": "PurchaseHistory",
+	            "item": [
+	                        {
+    "name": "/users/:userId/purchases/top-expensive-products",
+                "description": "Returns up to four distinct products with the highest unit prices from the given user's historical purchases, ordered from most to least expensive.",
+                 "item": [
+                            {
+                                "name": "Get top four expensive purchased products",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/users/:userId/purchases/top-expensive-products",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "users",
+        ":userId",
+        "purchases",
+        "top-expensive-products"
+    ],
+    "variable": [
+        {
+        "key": "userId",
+        "value": "",
+        "description": "Unique identifier of the user."
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": "Returns up to four distinct products with the highest unit prices from the given user's historical purchases, ordered from most to least expensive."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        }
+	                    ]
+	        },
+	        {
+	            "name": "Carts",
+	            "item": [
+	                        {
+    "name": "/carts",
+                "description": "Creates a shopping cart for a user. VIP carts are only allowed for users whose vip flag is true at the time of cart creation. The selected cart type is persisted on the cart and cannot change later.",
+                 "item": [
+                            {
+                                "name": "Create cart",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Content-Type",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "{\n \"userId\": \"<string>\",\n \"cartType\": \"<string>\"\n}",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/carts",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "carts"
+    ],
+    "variable": [
+    ],
+    "query": [
+    ]
+    },
+    "description": "Creates a shopping cart for a user. VIP carts are only allowed for users whose vip flag is true at the time of cart creation. The selected cart type is persisted on the cart and cannot change later."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/carts/:cartId",
+                "description": "Deletes a cart that has not been checked out.",
+                 "item": [
+                            {
+                                "name": "Delete cart",
+                                "request": {
+    "method": "DELETE",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/carts/:cartId",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "carts",
+        ":cartId"
+    ],
+    "variable": [
+        {
+        "key": "cartId",
+        "value": "",
+        "description": "Unique identifier of the cart."
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": "Deletes a cart that has not been checked out."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/carts/:cartId",
+                "description": "Retrieves the current cart state, including pricing summary.",
+                 "item": [
+                            {
+                                "name": "Get cart",
+                                "request": {
+    "method": "GET",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/carts/:cartId",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "carts",
+        ":cartId"
+    ],
+    "variable": [
+        {
+        "key": "cartId",
+        "value": "",
+        "description": "Unique identifier of the cart."
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": "Retrieves the current cart state, including pricing summary."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/carts/:cartId/checkout",
+                "description": "Finalizes a cart and persists its contents in the user's purchase history.",
+                 "item": [
+                            {
+                                "name": "Checkout cart",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/carts/:cartId/checkout",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "carts",
+        ":cartId",
+        "checkout"
+    ],
+    "variable": [
+        {
+        "key": "cartId",
+        "value": "",
+        "description": "Unique identifier of the cart."
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": "Finalizes a cart and persists its contents in the user's purchase history."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/carts/:cartId/items",
+                "description": "Adds a product to a cart or increases its quantity.",
+                 "item": [
+                            {
+                                "name": "Add product to cart",
+                                "request": {
+    "method": "POST",
+    "header": [
+        {
+        "key": "Content-Type",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        },
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "{\n \"productId\": \"<string>\",\n \"quantity\": \"<number>\"\n}",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/carts/:cartId/items",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "carts",
+        ":cartId",
+        "items"
+    ],
+    "variable": [
+        {
+        "key": "cartId",
+        "value": "",
+        "description": "Unique identifier of the cart."
+        }
+    ],
+    "query": [
+    ]
+    },
+    "description": "Adds a product to a cart or increases its quantity."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/carts/:cartId/items/:productId",
+                "description": "Removes quantity from a cart line item or deletes the line entirely.",
+                 "item": [
+                            {
+                                "name": "Remove product from cart",
+                                "request": {
+    "method": "DELETE",
+    "header": [
+        {
+        "key": "Accept",
+        "value": "application/json",
+        "description": "",
+        "disabled": false
+        }
+    ],
+    "body": {
+    "mode": "raw",
+    "raw": "",
+    "options": {
+    "raw": {
+    "language": "json"
+    }
+    }
+    },
+    "url": {
+    "raw": "{{baseUrl}}/carts/:cartId/items/:productId",
+    "host": [
+    "{{baseUrl}}"
+    ],
+    "path": [
+        "carts",
+        ":cartId",
+        "items",
+        ":productId"
+    ],
+    "variable": [
+        {
+        "key": "cartId",
+        "value": "",
+        "description": "Unique identifier of the cart."
+        },
+        {
+        "key": "productId",
+        "value": "",
+        "description": "Unique identifier of the product."
+        }
+    ],
+    "query": [
+        {
+        "key": "quantity",
+        "value": "56",
+        "description": "Quantity to remove. Defaults to one unit when omitted.",
+        "disabled": true
+        }
+    ]
+    },
+    "description": "Removes quantity from a cart line item or deletes the line entirely."
+}
+                                ,"response": [
+                            ]
+                            }
+                            ]
+                        }
+	                    ]
+	        }
+    ],
+    
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://cart-service.shopping-platform.example",
+			"type": "string"
+        }
+	]
+}
+
