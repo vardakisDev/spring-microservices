@@ -50,8 +50,9 @@ class CreateCartUseCaseTest {
                 ignored -> new UserDirectoryPort.UserSnapshot(userId, false),
                 pricingCalculator,
                 clock);
+        CreateCartCommand command = new CreateCartCommand(userId, CartType.VIP);
 
-        assertThatThrownBy(() -> useCase.execute(new CreateCartCommand(userId, CartType.VIP)))
+        assertThatThrownBy(() -> useCase.execute(command))
                 .isInstanceOf(ConflictException.class)
                 .hasMessage("user is not eligible for VIP carts");
     }

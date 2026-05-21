@@ -60,11 +60,13 @@ class CartTest {
     void forbidsMutatingCheckedOutCart() {
         OffsetDateTime createdAt = OffsetDateTime.now();
         Cart cart = new Cart(UUID.randomUUID(), UUID.randomUUID(), CartType.NORMAL, createdAt, pricingCalculator);
+        UUID penId = UUID.randomUUID();
+        BigDecimal penPrice = new BigDecimal("2.00");
 
         cart.addItem(UUID.randomUUID(), "Book", new BigDecimal("15.00"), 1);
         cart.checkout(UUID.randomUUID(), createdAt.plusMinutes(5));
 
-        assertThatThrownBy(() -> cart.addItem(UUID.randomUUID(), "Pen", new BigDecimal("2.00"), 1))
+        assertThatThrownBy(() -> cart.addItem(penId, "Pen", penPrice, 1))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("cart is not open");
     }
@@ -72,8 +74,10 @@ class CartTest {
     @Test
     void forbidsCheckoutOfEmptyCart() {
         Cart cart = new Cart(UUID.randomUUID(), UUID.randomUUID(), CartType.NORMAL, OffsetDateTime.now(), pricingCalculator);
+        UUID purchaseId = UUID.randomUUID();
+        OffsetDateTime checkedOutAt = OffsetDateTime.now().plusMinutes(1);
 
-        assertThatThrownBy(() -> cart.checkout(UUID.randomUUID(), OffsetDateTime.now().plusMinutes(1)))
+        assertThatThrownBy(() -> cart.checkout(purchaseId, checkedOutAt))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("cannot checkout an empty cart");
     }

@@ -1,8 +1,8 @@
 CREATE TABLE carts (
     id UUID PRIMARY KEY,
     user_id UUID NOT NULL,
-    cart_type VARCHAR(20) NOT NULL,
-    status VARCHAR(20) NOT NULL,
+    cart_type VARCHAR(20) NOT NULL, -- NOSONAR PostgreSQL uses VARCHAR; VARCHAR2 is Oracle-specific.
+    status VARCHAR(20) NOT NULL, -- NOSONAR PostgreSQL uses VARCHAR; VARCHAR2 is Oracle-specific.
     created_at TIMESTAMPTZ NOT NULL,
     updated_at TIMESTAMPTZ NOT NULL
 );
@@ -10,7 +10,7 @@ CREATE TABLE carts (
 CREATE TABLE cart_items (
     cart_id UUID NOT NULL,
     product_id UUID NOT NULL,
-    product_name VARCHAR(150) NOT NULL,
+    product_name VARCHAR(150) NOT NULL, -- NOSONAR PostgreSQL uses VARCHAR; VARCHAR2 is Oracle-specific.
     unit_price NUMERIC(12, 2) NOT NULL,
     quantity INTEGER NOT NULL,
     PRIMARY KEY (cart_id, product_id),
@@ -23,7 +23,7 @@ CREATE TABLE purchases (
     id UUID PRIMARY KEY,
     cart_id UUID NOT NULL,
     user_id UUID NOT NULL,
-    cart_type VARCHAR(20) NOT NULL,
+    cart_type VARCHAR(20) NOT NULL, -- NOSONAR PostgreSQL uses VARCHAR; VARCHAR2 is Oracle-specific.
     total_amount NUMERIC(12, 2) NOT NULL,
     checked_out_at TIMESTAMPTZ NOT NULL
 );
@@ -31,7 +31,7 @@ CREATE TABLE purchases (
 CREATE TABLE purchase_items (
     purchase_id UUID NOT NULL,
     product_id UUID NOT NULL,
-    product_name VARCHAR(150) NOT NULL,
+    product_name VARCHAR(150) NOT NULL, -- NOSONAR PostgreSQL uses VARCHAR; VARCHAR2 is Oracle-specific.
     unit_price NUMERIC(12, 2) NOT NULL,
     quantity INTEGER NOT NULL,
     line_total NUMERIC(12, 2) NOT NULL,

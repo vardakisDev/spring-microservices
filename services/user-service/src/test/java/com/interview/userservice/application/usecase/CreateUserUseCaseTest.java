@@ -38,8 +38,9 @@ class CreateUserUseCaseTest {
     void rejectsDuplicateEmails() {
         CreateUserUseCase useCase = new CreateUserUseCase(userRepository, clock);
         useCase.execute(new CreateUserCommand("john@example.com", "John", "Doe", false));
+        CreateUserCommand duplicateCommand = new CreateUserCommand("john@example.com", "Jane", "Doe", true);
 
-        assertThatThrownBy(() -> useCase.execute(new CreateUserCommand("john@example.com", "Jane", "Doe", true)))
+        assertThatThrownBy(() -> useCase.execute(duplicateCommand))
                 .isInstanceOf(ConflictException.class)
                 .hasMessage("user email already exists: john@example.com");
     }

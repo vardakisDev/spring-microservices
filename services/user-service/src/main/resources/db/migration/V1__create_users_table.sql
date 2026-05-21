@@ -1,8 +1,8 @@
 CREATE TABLE users (
     id UUID PRIMARY KEY,
-    email VARCHAR(255) NOT NULL,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL, -- NOSONAR PostgreSQL uses VARCHAR; VARCHAR2 is Oracle-specific.
+    first_name VARCHAR(100) NOT NULL, -- NOSONAR PostgreSQL uses VARCHAR; VARCHAR2 is Oracle-specific.
+    last_name VARCHAR(100) NOT NULL, -- NOSONAR PostgreSQL uses VARCHAR; VARCHAR2 is Oracle-specific.
     vip BOOLEAN NOT NULL,
     created_at TIMESTAMPTZ NOT NULL,
     updated_at TIMESTAMPTZ NOT NULL,

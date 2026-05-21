@@ -51,6 +51,7 @@ public class JpaCartRepositoryAdapter implements CartRepositoryPort {
 
     private Cart toDomain(CartEntity entity) {
         return Cart.rehydrate(
+            new Cart.CartSnapshot(
                 entity.getId(),
                 entity.getUserId(),
                 entity.getCartType(),
@@ -59,7 +60,7 @@ public class JpaCartRepositoryAdapter implements CartRepositoryPort {
                 entity.getUpdatedAt(),
                 entity.getItems().stream()
                         .map(item -> new CartItem(item.getProductId(), item.getProductName(), item.getUnitPrice(), item.getQuantity()))
-                        .toList(),
+                .toList()),
                 pricingCalculator);
     }
 }

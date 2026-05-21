@@ -39,8 +39,9 @@ class CreateProductUseCaseTest {
     void rejectsDuplicateNames() {
         CreateProductUseCase useCase = new CreateProductUseCase(productRepository, clock);
         useCase.execute(new CreateProductCommand("Laptop", "Main product", new BigDecimal("999.99")));
+        CreateProductCommand duplicateCommand = new CreateProductCommand("Laptop", "Other product", new BigDecimal("1000.00"));
 
-        assertThatThrownBy(() -> useCase.execute(new CreateProductCommand("Laptop", "Other product", new BigDecimal("1000.00"))))
+        assertThatThrownBy(() -> useCase.execute(duplicateCommand))
                 .isInstanceOf(ConflictException.class)
                 .hasMessage("product already exists: Laptop");
     }

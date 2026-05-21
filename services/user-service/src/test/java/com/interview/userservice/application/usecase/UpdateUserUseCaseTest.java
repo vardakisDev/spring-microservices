@@ -38,8 +38,10 @@ class UpdateUserUseCaseTest {
     @Test
     void failsWhenUserDoesNotExist() {
         UpdateUserUseCase updateUserUseCase = new UpdateUserUseCase(userRepository, clock);
+        UUID missingUserId = UUID.randomUUID();
+        UpdateUserCommand command = new UpdateUserCommand("john@example.com", "John", "Doe", true);
 
-        assertThatThrownBy(() -> updateUserUseCase.execute(UUID.randomUUID(), new UpdateUserCommand("john@example.com", "John", "Doe", true)))
+        assertThatThrownBy(() -> updateUserUseCase.execute(missingUserId, command))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageStartingWith("user not found:");
     }

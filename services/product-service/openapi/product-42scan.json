@@ -1,0 +1,169 @@
+{
+    "index": [
+        "/paths/~1products/post/requestBody/content/application~1json/example",
+        "/paths/~1products~1{productId}/put/requestBody/content/application~1json/example"
+    ],
+    "assessmentVersion": "3.56.0",
+    "assessmentReportVersion": "1.0.2",
+    "commit": "1915b9d294de034d9c70e51118884835ab12be17-E",
+    "oasVersion": "3.0.3",
+    "apiVersion": "1.0.0",
+    "fileId": "",
+    "apiId": "",
+    "openapiState": "valid",
+    "score": 100,
+    "valid": true,
+    "criticality": 0,
+    "issueCounter": 0,
+    "warnings": {
+        "issues": {
+            "v3-warning-example-schema-not-consistent": {
+                "description": "Example is not consistent with the underlying schema",
+                "totalIssues": 2,
+                "issues": [
+                    {
+                        "pointer": 1,
+                        "specificDescription": "",
+                        "fingerprint": "5be8e180fcc8defec9eb2cb8d54e9c2f0b6ccdd6"
+                    },
+                    {
+                        "pointer": 0,
+                        "specificDescription": "",
+                        "fingerprint": "44b8314ad4eb6b8b931482719fba5a48d802c63f"
+                    }
+                ],
+                "tooManyError": false
+            }
+        }
+    },
+    "minimalReport": false,
+    "maxEntriesPerIssue": 30,
+    "maxImpactedPerEntry": 30,
+    "security": {
+        "issueCounter": 0,
+        "score": 30,
+        "criticality": 0,
+        "issues": {},
+        "subgroupIssueCounter": {
+            "authentication": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "authorization": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "transport": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            }
+        }
+    },
+    "data": {
+        "issueCounter": 0,
+        "score": 70,
+        "criticality": 0,
+        "issues": {},
+        "subgroupIssueCounter": {
+            "parameters": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "responseHeader": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "responseDefinition": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "schema": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "paths": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            }
+        }
+    },
+    "issuesKey": [
+        "v3-warning-example-schema-not-consistent"
+    ],
+    "summary": {
+        "oasVersion": "3.0.3",
+        "apiVersion": "1.0.0",
+        "basepath": "",
+        "apiName": "Product Service API",
+        "description": "API-first contract for product-service ownership of catalog products and pricing.",
+        "endpoints": [
+            "https://product-service.shopping-platform.example"
+        ],
+        "pathCounter": 1,
+        "operationCounter": 5,
+        "parameterCounter": 3,
+        "requestBodyCounter": 2,
+        "schemesCounter": {
+            "https": 5
+        },
+        "requestContentType": {
+            "application/json": 2
+        },
+        "responseContentType": {
+            "application/json": 42
+        },
+        "security": [
+            [
+                "BearerAuth"
+            ]
+        ],
+        "securitySchemes": {
+            "BearerAuth": {
+                "counterInsecure": 0,
+                "counterSecure": 5,
+                "type": "http"
+            }
+        },
+        "componentsSchemasCounter": 5,
+        "componentsResponsesCounter": 9,
+        "componentsParametersCounter": 1,
+        "componentsExamplesCounter": 0,
+        "componentsRequestBodiesCounter": 0,
+        "componentsHeadersCounter": 0,
+        "componentsSecuritySchemesCounter": 1,
+        "componentsLinksCounter": 0,
+        "componentsCallbacksCounter": 0
+    }
+}

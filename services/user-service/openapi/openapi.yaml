@@ -25,10 +25,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserCollectionResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '406':
+          $ref: '#/components/responses/NotAcceptableResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
         '401':
           $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
+        default:
+          $ref: '#/components/responses/DefaultErrorResponse'
     post:
       tags: [Users]
       operationId: createUser
@@ -40,6 +48,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateUserRequest'
+            example:
+              email: vip.customer@example.com
+              firstName: Alice
+              lastName: Johnson
+              vip: true
       responses:
         '201':
           description: User created successfully.
@@ -47,6 +60,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
+        '406':
+          $ref: '#/components/responses/NotAcceptableResponse'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaTypeResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
         '400':
           $ref: '#/components/responses/BadRequestResponse'
         '401':
@@ -55,6 +74,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '409':
           $ref: '#/components/responses/ConflictResponse'
+        default:
+          $ref: '#/components/responses/DefaultErrorResponse'
   /users/{userId}:
     parameters:
       - $ref: '#/components/parameters/UserId'
@@ -70,6 +91,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
+        '406':
+          $ref: '#/components/responses/NotAcceptableResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
         '400':
           $ref: '#/components/responses/BadRequestResponse'
         '401':
@@ -78,6 +103,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        default:
+          $ref: '#/components/responses/DefaultErrorResponse'
     put:
       tags: [Users]
       operationId: updateUser
@@ -89,6 +116,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateUserRequest'
+            example:
+              email: alice.updated@example.com
+              firstName: Alice
+              lastName: Robertson
+              vip: false
       responses:
         '200':
           description: User updated successfully.
@@ -96,6 +128,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserResponse'
+        '406':
+          $ref: '#/components/responses/NotAcceptableResponse'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaTypeResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
         '400':
           $ref: '#/components/responses/BadRequestResponse'
         '401':
@@ -106,6 +144,8 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '409':
           $ref: '#/components/responses/ConflictResponse'
+        default:
+          $ref: '#/components/responses/DefaultErrorResponse'
     delete:
       tags: [Users]
       operationId: deleteUser
@@ -114,6 +154,10 @@ paths:
       responses:
         '204':
           description: User deleted successfully.
+        '406':
+          $ref: '#/components/responses/NotAcceptableResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
         '400':
           $ref: '#/components/responses/BadRequestResponse'
         '401':
@@ -124,6 +168,8 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '409':
           $ref: '#/components/responses/ConflictResponse'
+        default:
+          $ref: '#/components/responses/DefaultErrorResponse'
 components:
   securitySchemes:
     BearerAuth:
@@ -137,9 +183,13 @@ components:
       in: path
       required: true
       description: Unique identifier of the user.
+      example: '123e4567-e89b-12d3-a456-426614174000'
       schema:
         type: string
         format: uuid
+        minLength: 36
+        maxLength: 36
+        pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$'
   responses:
     BadRequestResponse:
       description: The request was invalid.
@@ -171,6 +221,30 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotAcceptableResponse:
+      description: The requested representation is not available for the supplied Accept header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnsupportedMediaTypeResponse:
+      description: The request Content-Type is unsupported for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequestsResponse:
+      description: The client sent too many requests in a given amount of time.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    DefaultErrorResponse:
+      description: Unexpected error response for unclassified failures.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     CreateUserRequest:
       type: object
@@ -182,16 +256,19 @@ components:
           format: email
           minLength: 5
           maxLength: 255
+          pattern: '^[^@\s]+@[^@\s]+\.[^@\s]+$'
           description: Unique email address of the user.
         firstName:
           type: string
           minLength: 1
           maxLength: 100
+          pattern: '^[^\r\n\t]+$'
           description: Given name of the user.
         lastName:
           type: string
           minLength: 1
           maxLength: 100
+          pattern: '^[^\r\n\t]+$'
           description: Family name of the user.
         vip:
           type: boolean
@@ -206,16 +283,19 @@ components:
           format: email
           minLength: 5
           maxLength: 255
+          pattern: '^[^@\s]+@[^@\s]+\.[^@\s]+$'
           description: Unique email address of the user.
         firstName:
           type: string
           minLength: 1
           maxLength: 100
+          pattern: '^[^\r\n\t]+$'
           description: Given name of the user.
         lastName:
           type: string
           minLength: 1
           maxLength: 100
+          pattern: '^[^\r\n\t]+$'
           description: Family name of the user.
         vip:
           type: boolean
@@ -228,16 +308,28 @@ components:
         id:
           type: string
           format: uuid
+          minLength: 36
+          maxLength: 36
+          pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$'
           description: Unique identifier of the user.
         email:
           type: string
           format: email
+          minLength: 5
+          maxLength: 255
+          pattern: '^[^@\s]+@[^@\s]+\.[^@\s]+$'
           description: Unique email address of the user.
         firstName:
           type: string
+          minLength: 1
+          maxLength: 100
+          pattern: '^[^\r\n\t]+$'
           description: Given name of the user.
         lastName:
           type: string
+          minLength: 1
+          maxLength: 100
+          pattern: '^[^\r\n\t]+$'
           description: Family name of the user.
         vip:
           type: boolean
@@ -271,11 +363,13 @@ components:
           type: string
           minLength: 3
           maxLength: 100
+          pattern: '^[A-Z0-9_]+$'
           description: Stable application-specific error code.
         message:
           type: string
           minLength: 1
           maxLength: 500
+          pattern: '^[^\r\n\t]+$'
           description: Human readable explanation of the error.
         timestamp:
           type: string

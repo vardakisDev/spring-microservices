@@ -1,0 +1,786 @@
+{
+    "index": [
+        "/components/parameters/CartId",
+        "/components/parameters/CartId/schema",
+        "/components/parameters/UserId",
+        "/components/parameters/UserId/schema",
+        "/components/schemas/AddCartItemRequest/properties/productId",
+        "/components/schemas/AddCartItemRequest/properties/quantity",
+        "/components/schemas/CartItemResponse/properties/productId",
+        "/components/schemas/CartItemResponse/properties/productName",
+        "/components/schemas/CartResponse/properties/id",
+        "/components/schemas/CartResponse/properties/userId",
+        "/components/schemas/CheckoutItemResponse/properties/productId",
+        "/components/schemas/CheckoutItemResponse/properties/productName",
+        "/components/schemas/CheckoutResponse/properties/cartId",
+        "/components/schemas/CheckoutResponse/properties/purchaseId",
+        "/components/schemas/CheckoutResponse/properties/userId",
+        "/components/schemas/CreateCartRequest/properties/userId",
+        "/components/schemas/ErrorResponse/properties/code",
+        "/components/schemas/ErrorResponse/properties/message",
+        "/components/schemas/PurchasedProductSummary/properties/productId",
+        "/components/schemas/PurchasedProductSummary/properties/productName",
+        "/components/schemas/TopPurchasedProductsResponse/properties/userId",
+        "/paths/~1carts/post/requestBody/content/application~1json",
+        "/paths/~1carts/post/responses",
+        "/paths/~1carts~1{cartId}/delete/responses",
+        "/paths/~1carts~1{cartId}/get/responses",
+        "/paths/~1carts~1{cartId}~1checkout/post/responses",
+        "/paths/~1carts~1{cartId}~1items/post/requestBody/content/application~1json",
+        "/paths/~1carts~1{cartId}~1items/post/responses",
+        "/paths/~1carts~1{cartId}~1items~1{productId}/delete/responses",
+        "/paths/~1carts~1{cartId}~1items~1{productId}/parameters/1",
+        "/paths/~1carts~1{cartId}~1items~1{productId}/parameters/1/schema",
+        "/paths/~1carts~1{cartId}~1items~1{productId}/parameters/2",
+        "/paths/~1carts~1{cartId}~1items~1{productId}/parameters/2/schema",
+        "/paths/~1users~1{userId}~1purchases~1top-expensive-products/get/responses"
+    ],
+    "assessmentVersion": "3.56.0",
+    "assessmentReportVersion": "1.0.2",
+    "commit": "1915b9d294de034d9c70e51118884835ab12be17-E",
+    "oasVersion": "3.0.3",
+    "apiVersion": "1.0.0",
+    "fileId": "",
+    "apiId": "",
+    "openapiState": "valid",
+    "score": 45.9,
+    "valid": true,
+    "criticality": 3,
+    "issueCounter": 59,
+    "warnings": {
+        "issues": {
+            "v3-warning-sample-undefined": {
+                "description": "No sample values or examples were provided for API Conformance Scan",
+                "totalIssues": 6,
+                "issues": [
+                    {
+                        "pointer": 0,
+                        "specificDescription": "No sample defined in the 'Parameter' object",
+                        "fingerprint": "11f6bef479c5fb0596a075032a5a4c41fcd4d3bd"
+                    },
+                    {
+                        "pointer": 2,
+                        "specificDescription": "No sample defined in the 'Parameter' object",
+                        "fingerprint": "405e8e8c6799bca1800b4d7b960ddaa3ac6ccb31"
+                    },
+                    {
+                        "pointer": 21,
+                        "specificDescription": "No sample defined in the 'Request Body' object",
+                        "fingerprint": "6ecc76156b6a19fd3638e97be489cd150d76f6bd"
+                    },
+                    {
+                        "pointer": 26,
+                        "specificDescription": "No sample defined in the 'Request Body' object",
+                        "fingerprint": "1c3d11d1df7d668cc5c544ca9762662cece3c4ca"
+                    },
+                    {
+                        "pointer": 29,
+                        "specificDescription": "No sample defined in the 'Parameter' object",
+                        "fingerprint": "e78dc9b571125a701b26ed43dd0173680b9320f7"
+                    },
+                    {
+                        "pointer": 31,
+                        "specificDescription": "No sample defined in the 'Parameter' object",
+                        "fingerprint": "a6bb42f93eb8cc38cadf177a0f4832ba30eb8437"
+                    }
+                ],
+                "tooManyError": false
+            }
+        }
+    },
+    "minimalReport": false,
+    "maxEntriesPerIssue": 30,
+    "maxImpactedPerEntry": 30,
+    "security": {
+        "issueCounter": 0,
+        "score": 30,
+        "criticality": 0,
+        "issues": {},
+        "subgroupIssueCounter": {
+            "authentication": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "authorization": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "transport": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            }
+        }
+    },
+    "data": {
+        "issueCounter": 59,
+        "score": 15.9,
+        "criticality": 3,
+        "issues": {
+            "v3-response-406": {
+                "description": "406 response should be defined for all GET, POST, PUT, PATCH, and DELETE operations",
+                "issues": [
+                    {
+                        "score": -0.09,
+                        "pointer": 24,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "762c682261d51027da0430234ec4904803642c88"
+                    },
+                    {
+                        "score": -0.09,
+                        "pointer": 33,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "b6f49801e65d9c9f0ac6a52b1743050e21533cfa"
+                    },
+                    {
+                        "score": -0.08,
+                        "pointer": 23,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "38666a372cb2109d7fc842641b5d3e9e17dbdec7"
+                    },
+                    {
+                        "score": -0.08,
+                        "pointer": 28,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "64a01bb052afd8744ecaaf81cac469010d676604"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 22,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "c5498491aa1ecf1c440962036409db060c1df18e"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 25,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "a90ead01b9095c78bec33171b8e42751b76d0eca"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 27,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "f1571f709e5f42a19fc31f4bf5352f90a079ce34"
+                    }
+                ],
+                "issueCounter": 7,
+                "score": -0.52,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-response-415": {
+                "description": "415 response should be defined for operations receiving a body (POST, PUT, PATCH)",
+                "issues": [
+                    {
+                        "score": -0.07,
+                        "pointer": 22,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "781c84ba203ed364dc60fc1f57ea5ba188f66704"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 25,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "006f7af417e5b241dfd818c1fdcb8636a3b35e5f"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 27,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "bc9335053710ca6a313a130b2798f251fdc59e2f"
+                    }
+                ],
+                "issueCounter": 3,
+                "score": -0.2,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-response-429": {
+                "description": "429 response should be defined for all operations",
+                "issues": [
+                    {
+                        "score": -0.09,
+                        "pointer": 24,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "469b18002bf05a5753e66a281fbfe035d89d2861"
+                    },
+                    {
+                        "score": -0.09,
+                        "pointer": 33,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "5a4d23b530f476a6a57a3ba4e251ad04ae768ea0"
+                    },
+                    {
+                        "score": -0.08,
+                        "pointer": 23,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "fb55dc25d5cf0b7c6596a9895f5dcbfdef2abbd4"
+                    },
+                    {
+                        "score": -0.08,
+                        "pointer": 28,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "705a6e60551c2367479565631171d27474b36441"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 22,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "76b4de544ae7f423ff7f96d12280b1dcd79d1c0f"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 25,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "3334ad4b05287b8ba124b1801fdb2bf057689456"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 27,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "6d5dd88bcc41db289df2cd444d5b9516fc2b01f4"
+                    }
+                ],
+                "issueCounter": 7,
+                "score": -0.52,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-response-default-undefined": {
+                "description": "No default response defined for the operation",
+                "issues": [
+                    {
+                        "score": -0.09,
+                        "pointer": 24,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "1069ae5bdf2300e271f2390eec47705ce882ac17"
+                    },
+                    {
+                        "score": -0.09,
+                        "pointer": 33,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "2a973356bd2fe735251fa82d1bf5a3b0e33adc78"
+                    },
+                    {
+                        "score": -0.08,
+                        "pointer": 23,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "98bba8598a005aaa08e973afd57fbe124cd867e6"
+                    },
+                    {
+                        "score": -0.08,
+                        "pointer": 28,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "1253e7c2f791ec17285d365d133c883f94edd78e"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 22,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "0d75287e1c44347c7422be277559751863db8a56"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 25,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "bc5f84181492d8ac9f7cdd9be0f87fd9572e0b0f"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 27,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "02a410ec4f6c2de58196d80044538beeff67ee1f"
+                    }
+                ],
+                "issueCounter": 7,
+                "score": -0.52,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-schema-request-numerical-format": {
+                "description": "Numeric schema in a request has no format defined",
+                "issues": [
+                    {
+                        "specificDescription": "Numeric schema of type 'integer' has no format defined",
+                        "score": -0.53,
+                        "pointer": 32,
+                        "tooManyImpacted": false,
+                        "criticality": 2,
+                        "request": true,
+                        "fingerprint": "f14d96c1a6f6d89d2e043c006dedce9043dcdbaf"
+                    },
+                    {
+                        "specificDescription": "Numeric schema of type 'integer' has no format defined",
+                        "score": -0.4,
+                        "pointer": 5,
+                        "tooManyImpacted": false,
+                        "criticality": 2,
+                        "request": true,
+                        "fingerprint": "bdd5dd40e7c9ee24ce442851c0ea48aa5c343abb"
+                    }
+                ],
+                "issueCounter": 2,
+                "score": -0.93,
+                "criticality": 2,
+                "tooManyError": false
+            },
+            "v3-schema-request-string-maxlength": {
+                "description": "String schema in a request has no maximum length defined",
+                "issues": [
+                    {
+                        "score": -12.27,
+                        "pointer": 1,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "c2dc8aff25e5d62fdf8b408c07685f07a6b57760"
+                    },
+                    {
+                        "score": -3.2,
+                        "pointer": 3,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "335b752691a4ce413a462f7cdbc282b365635fd9"
+                    },
+                    {
+                        "score": -1.6,
+                        "pointer": 15,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "aa2a94f491752afafbfb2e3a32d168c81e7bbdf6"
+                    },
+                    {
+                        "score": -1.07,
+                        "pointer": 30,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "c2783033fc6c54e9938786be937c170935744375"
+                    },
+                    {
+                        "score": -0.8,
+                        "pointer": 4,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "48a914b153b9c8c0bb1d573f97199ef1928b6007"
+                    }
+                ],
+                "issueCounter": 5,
+                "score": -18.93,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-schema-request-string-pattern": {
+                "description": "String schema in a request has no pattern defined",
+                "issues": [
+                    {
+                        "score": -18.4,
+                        "pointer": 1,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "f7fbcb12be9e0f95d0547bdd3265d8df77ed6049"
+                    },
+                    {
+                        "score": -4.8,
+                        "pointer": 3,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "0b421bff3e1abc4e11c7a973428dd4b730a9b1be"
+                    },
+                    {
+                        "score": -2.4,
+                        "pointer": 15,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "7d703bc8da166e4ad9c2eacd676b57e7cfd2bbac"
+                    },
+                    {
+                        "score": -1.6,
+                        "pointer": 30,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "0986e92c8bd5f6b887b9c8a868f87f5ed2dac727"
+                    },
+                    {
+                        "score": -1.2,
+                        "pointer": 4,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "de6c6c5b4d79fdb5b980584c893e2bfa40f56ff3"
+                    }
+                ],
+                "issueCounter": 5,
+                "score": -28.4,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-schema-response-string-maxlength": {
+                "description": "String schema in a response has no maximum length defined",
+                "issues": [
+                    {
+                        "score": -0.28,
+                        "pointer": 20,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "c1720117315dcdd3cd63a91531b73856c9f30ba4"
+                    },
+                    {
+                        "score": -0.28,
+                        "pointer": 8,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "9511e4d69cf304c127208064feba1576348fed73"
+                    },
+                    {
+                        "score": -0.28,
+                        "pointer": 9,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "3ca68ed59b5eb4e3e811bc4ebc381e4cd8e903a0"
+                    },
+                    {
+                        "score": -0.08,
+                        "pointer": 13,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "81c4d5acd2145df05a14ca1535f67df89caaba8c"
+                    },
+                    {
+                        "score": -0.08,
+                        "pointer": 14,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "14858ec0a26568cba4ff4dbd116146a0aae32709"
+                    },
+                    {
+                        "score": -0.08,
+                        "pointer": 12,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "e681d7e78955e4c2e0297b096a23b7d849aaf73b"
+                    },
+                    {
+                        "score": -0.05,
+                        "pointer": 18,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "054a89923a42eccd81d6cef9de91d2d9c54e050d"
+                    },
+                    {
+                        "score": -0.04,
+                        "pointer": 6,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "ca0d55ccbf35c55fe6b06549be30a72cc1140258"
+                    },
+                    {
+                        "score": -0.01,
+                        "pointer": 10,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "172da73850275de5441d76b022335b3a8d16c907"
+                    }
+                ],
+                "issueCounter": 9,
+                "score": -1.18,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-schema-response-string-pattern": {
+                "description": "String schema in a response has no pattern defined",
+                "issues": [
+                    {
+                        "score": -0.49,
+                        "pointer": 16,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "6226300508c4b7d7ebce2a838a8069acfae62191"
+                    },
+                    {
+                        "score": -0.49,
+                        "pointer": 17,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "9509d76d2091b0ca408b0060115f419e7508c08f"
+                    },
+                    {
+                        "score": -0.42,
+                        "pointer": 20,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "42a3f695d7bc43af57e0f3195b47007ee74a4250"
+                    },
+                    {
+                        "score": -0.42,
+                        "pointer": 8,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "daeec86364e2c959c82f97fd1a395f38a55056ea"
+                    },
+                    {
+                        "score": -0.42,
+                        "pointer": 9,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "c917e3716b321d9341404f41d2e5f0a452889bed"
+                    },
+                    {
+                        "score": -0.12,
+                        "pointer": 13,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "73a6f096abaaf337e2febb0eac04a29efc76498c"
+                    },
+                    {
+                        "score": -0.12,
+                        "pointer": 14,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "890b9fa2a53ea181e6689bc1bec7171a74d7bcc4"
+                    },
+                    {
+                        "score": -0.12,
+                        "pointer": 12,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "161a4baf94fded5827f52dc3ef6d8e9af2c82591"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 19,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "8202697b367711d21dd055cf9c0f0cdea5396911"
+                    },
+                    {
+                        "score": -0.07,
+                        "pointer": 18,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "c0a22658e224c2192c47c64053e423fa78cf0ad1"
+                    },
+                    {
+                        "score": -0.06,
+                        "pointer": 7,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "fdc7e9cb0905ce88aec6715531356a15cc26cf4e"
+                    },
+                    {
+                        "score": -0.06,
+                        "pointer": 6,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "d163c6aada64f51bb15e0e921600bbb0225bb483"
+                    },
+                    {
+                        "score": -0.02,
+                        "pointer": 11,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "079793b2841b27896e25ba875b67c59a08a68078"
+                    },
+                    {
+                        "score": -0.02,
+                        "pointer": 10,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "0195d4b84d3ab7d6afdaf78cb2d3556239c35eff"
+                    }
+                ],
+                "issueCounter": 14,
+                "score": -2.89,
+                "criticality": 3,
+                "tooManyError": false
+            }
+        },
+        "subgroupIssueCounter": {
+            "parameters": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "responseHeader": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "responseDefinition": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 24,
+                "high": 0,
+                "critical": 0
+            },
+            "schema": {
+                "none": 0,
+                "info": 0,
+                "low": 2,
+                "medium": 33,
+                "high": 0,
+                "critical": 0
+            },
+            "paths": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            }
+        }
+    },
+    "issuesKey": [
+        "v3-schema-request-numerical-format",
+        "v3-schema-response-string-pattern",
+        "v3-schema-request-string-maxlength",
+        "v3-response-default-undefined",
+        "v3-response-415",
+        "v3-warning-sample-undefined",
+        "v3-response-429",
+        "v3-schema-response-string-maxlength",
+        "v3-response-406",
+        "v3-schema-request-string-pattern"
+    ],
+    "summary": {
+        "oasVersion": "3.0.3",
+        "apiVersion": "1.0.0",
+        "basepath": "",
+        "apiName": "Cart Service API",
+        "description": "API-first contract for the cart-service. This contract owns cart lifecycle, checkout, and purchase-history queries.",
+        "endpoints": [
+            "https://cart-service.shopping-platform.example"
+        ],
+        "pathCounter": 1,
+        "operationCounter": 7,
+        "parameterCounter": 8,
+        "requestBodyCounter": 2,
+        "schemesCounter": {
+            "https": 7
+        },
+        "requestContentType": {
+            "application/json": 2
+        },
+        "responseContentType": {
+            "application/json": 39
+        },
+        "security": [
+            [
+                "BearerAuth"
+            ]
+        ],
+        "securitySchemes": {
+            "BearerAuth": {
+                "counterInsecure": 0,
+                "counterSecure": 7,
+                "type": "http"
+            }
+        },
+        "componentsSchemasCounter": 12,
+        "componentsResponsesCounter": 5,
+        "componentsParametersCounter": 2,
+        "componentsExamplesCounter": 0,
+        "componentsRequestBodiesCounter": 0,
+        "componentsHeadersCounter": 0,
+        "componentsSecuritySchemesCounter": 1,
+        "componentsLinksCounter": 0,
+        "componentsCallbacksCounter": 0
+    }
+}

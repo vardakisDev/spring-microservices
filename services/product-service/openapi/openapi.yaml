@@ -25,10 +25,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductCollectionResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '406':
+          $ref: '#/components/responses/NotAcceptableResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
         '401':
           $ref: '#/components/responses/UnauthorizedResponse'
         '403':
           $ref: '#/components/responses/ForbiddenResponse'
+        default:
+          $ref: '#/components/responses/DefaultErrorResponse'
     post:
       tags: [Products]
       operationId: createProduct
@@ -40,6 +48,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateProductRequest'
+            example:
+              name: Laptop Pro 16
+              description: High-end professional laptop for workstation workloads.
+              price: 2499.99
       responses:
         '201':
           description: Product created successfully.
@@ -47,6 +59,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductResponse'
+        '406':
+          $ref: '#/components/responses/NotAcceptableResponse'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaTypeResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
         '400':
           $ref: '#/components/responses/BadRequestResponse'
         '401':
@@ -55,6 +73,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '409':
           $ref: '#/components/responses/ConflictResponse'
+        default:
+          $ref: '#/components/responses/DefaultErrorResponse'
   /products/{productId}:
     parameters:
       - $ref: '#/components/parameters/ProductId'
@@ -70,6 +90,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductResponse'
+        '406':
+          $ref: '#/components/responses/NotAcceptableResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
         '400':
           $ref: '#/components/responses/BadRequestResponse'
         '401':
@@ -78,6 +102,8 @@ paths:
           $ref: '#/components/responses/ForbiddenResponse'
         '404':
           $ref: '#/components/responses/NotFoundResponse'
+        default:
+          $ref: '#/components/responses/DefaultErrorResponse'
     put:
       tags: [Products]
       operationId: updateProduct
@@ -89,6 +115,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateProductRequest'
+            example:
+              name: Laptop Pro 16 Refresh
+              description: Updated professional laptop with larger SSD and more RAM.
+              price: 2699.99
       responses:
         '200':
           description: Product updated successfully.
@@ -96,6 +126,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductResponse'
+        '406':
+          $ref: '#/components/responses/NotAcceptableResponse'
+        '415':
+          $ref: '#/components/responses/UnsupportedMediaTypeResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
         '400':
           $ref: '#/components/responses/BadRequestResponse'
         '401':
@@ -106,6 +142,8 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '409':
           $ref: '#/components/responses/ConflictResponse'
+        default:
+          $ref: '#/components/responses/DefaultErrorResponse'
     delete:
       tags: [Products]
       operationId: deleteProduct
@@ -114,6 +152,10 @@ paths:
       responses:
         '204':
           description: Product deleted successfully.
+        '406':
+          $ref: '#/components/responses/NotAcceptableResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
         '400':
           $ref: '#/components/responses/BadRequestResponse'
         '401':
@@ -124,6 +166,8 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '409':
           $ref: '#/components/responses/ConflictResponse'
+        default:
+          $ref: '#/components/responses/DefaultErrorResponse'
 components:
   securitySchemes:
     BearerAuth:
@@ -137,9 +181,13 @@ components:
       in: path
       required: true
       description: Unique identifier of the product.
+      example: '123e4567-e89b-12d3-a456-426614174001'
       schema:
         type: string
         format: uuid
+        minLength: 36
+        maxLength: 36
+        pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$'
   responses:
     BadRequestResponse:
       description: The request was invalid.
@@ -171,6 +219,30 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotAcceptableResponse:
+      description: The requested representation is not available for the supplied Accept header.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnsupportedMediaTypeResponse:
+      description: The request Content-Type is unsupported for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequestsResponse:
+      description: The client sent too many requests in a given amount of time.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    DefaultErrorResponse:
+      description: Unexpected error response for unclassified failures.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     CreateProductRequest:
       type: object
@@ -181,14 +253,17 @@ components:
           type: string
           minLength: 1
           maxLength: 150
+          pattern: '^[^\r\n\t]+$'
           description: Product display name.
         description:
           type: string
           minLength: 1
           maxLength: 1000
+          pattern: '^[^\r\n\t]+$'
           description: Human readable product description.
         price:
           type: number
+          format: double
           minimum: 0.01
           maximum: 1000000
           multipleOf: 0.01
@@ -202,14 +277,17 @@ components:
           type: string
           minLength: 1
           maxLength: 150
+          pattern: '^[^\r\n\t]+$'
           description: Product display name.
         description:
           type: string
           minLength: 1
           maxLength: 1000
+          pattern: '^[^\r\n\t]+$'
           description: Human readable product description.
         price:
           type: number
+          format: double
           minimum: 0.01
           maximum: 1000000
           multipleOf: 0.01
@@ -222,23 +300,31 @@ components:
         id:
           type: string
           format: uuid
+          minLength: 36
+          maxLength: 36
+          pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$'
           description: Unique identifier of the product.
         name:
           type: string
+          minLength: 1
+          maxLength: 150
+          pattern: '^[^\r\n\t]+$'
           description: Product display name.
         description:
           type: string
+          minLength: 1
+          maxLength: 1000
+          pattern: '^[^\r\n\t]+$'
           description: Human readable product description.
         price:
           type: number
+          format: double
           minimum: 0
           maximum: 1000000
           multipleOf: 0.01
           description: Product unit price in euro.
         currency:
           type: string
-          minLength: 3
-          maxLength: 3
           enum: [EUR]
           description: Currency used by the service.
         createdAt:
@@ -270,11 +356,13 @@ components:
           type: string
           minLength: 3
           maxLength: 100
+          pattern: '^[A-Z0-9_]+$'
           description: Stable application-specific error code.
         message:
           type: string
           minLength: 1
           maxLength: 500
+          pattern: '^[^\r\n\t]+$'
           description: Human readable explanation of the error.
         timestamp:
           type: string

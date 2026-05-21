@@ -1,0 +1,572 @@
+{
+    "index": [
+        "/components/parameters/UserId",
+        "/components/parameters/UserId/schema",
+        "/components/schemas/CreateUserRequest/properties/email",
+        "/components/schemas/CreateUserRequest/properties/firstName",
+        "/components/schemas/CreateUserRequest/properties/lastName",
+        "/components/schemas/ErrorResponse/properties/code",
+        "/components/schemas/ErrorResponse/properties/message",
+        "/components/schemas/UpdateUserRequest/properties/email",
+        "/components/schemas/UpdateUserRequest/properties/firstName",
+        "/components/schemas/UpdateUserRequest/properties/lastName",
+        "/components/schemas/UserResponse/properties/email",
+        "/components/schemas/UserResponse/properties/firstName",
+        "/components/schemas/UserResponse/properties/id",
+        "/components/schemas/UserResponse/properties/lastName",
+        "/paths/~1users/get/responses",
+        "/paths/~1users/post/requestBody/content/application~1json",
+        "/paths/~1users/post/responses",
+        "/paths/~1users~1{userId}/delete/responses",
+        "/paths/~1users~1{userId}/get/responses",
+        "/paths/~1users~1{userId}/put/requestBody/content/application~1json",
+        "/paths/~1users~1{userId}/put/responses"
+    ],
+    "assessmentVersion": "3.56.0",
+    "assessmentReportVersion": "1.0.2",
+    "commit": "1915b9d294de034d9c70e51118884835ab12be17-E",
+    "oasVersion": "3.0.3",
+    "apiVersion": "1.0.0",
+    "fileId": "",
+    "apiId": "",
+    "openapiState": "valid",
+    "score": 51.57,
+    "valid": true,
+    "criticality": 3,
+    "issueCounter": 36,
+    "warnings": {
+        "issues": {
+            "v3-warning-sample-undefined": {
+                "description": "No sample values or examples were provided for API Conformance Scan",
+                "totalIssues": 3,
+                "issues": [
+                    {
+                        "pointer": 0,
+                        "specificDescription": "No sample defined in the 'Parameter' object",
+                        "fingerprint": "405e8e8c6799bca1800b4d7b960ddaa3ac6ccb31"
+                    },
+                    {
+                        "pointer": 19,
+                        "specificDescription": "No sample defined in the 'Request Body' object",
+                        "fingerprint": "8d548becf8b8c02ab7fb421e6e34470b679b92ef"
+                    },
+                    {
+                        "pointer": 15,
+                        "specificDescription": "No sample defined in the 'Request Body' object",
+                        "fingerprint": "7c1ed51447f839e5ad49c75bcd5b846366aefa54"
+                    }
+                ],
+                "tooManyError": false
+            }
+        }
+    },
+    "minimalReport": false,
+    "maxEntriesPerIssue": 30,
+    "maxImpactedPerEntry": 30,
+    "security": {
+        "issueCounter": 0,
+        "score": 30,
+        "criticality": 0,
+        "issues": {},
+        "subgroupIssueCounter": {
+            "authentication": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "authorization": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "transport": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            }
+        }
+    },
+    "data": {
+        "issueCounter": 36,
+        "score": 21.57,
+        "criticality": 3,
+        "issues": {
+            "v3-response-404": {
+                "description": "404 response should be defined for all GET, PUT, HEAD, and DELETE operations",
+                "issues": [
+                    {
+                        "score": -0.7,
+                        "pointer": 14,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "4f8f654743ba5fb2806da354d4ec2432d8f6d552"
+                    }
+                ],
+                "issueCounter": 1,
+                "score": -0.7,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-response-406": {
+                "description": "406 response should be defined for all GET, POST, PUT, PATCH, and DELETE operations",
+                "issues": [
+                    {
+                        "score": -0.7,
+                        "pointer": 14,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "11c86cb4898ed14821d862c069302365c06f095e"
+                    },
+                    {
+                        "score": -0.12,
+                        "pointer": 18,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "1fcdf51a96e0e9206d65474ee7cee7e9fc781c63"
+                    },
+                    {
+                        "score": -0.11,
+                        "pointer": 16,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "af7d266a2056ac640e36bb2f97246869c3fa0d9d"
+                    },
+                    {
+                        "score": -0.11,
+                        "pointer": 17,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "c2996a850b73f548ee13148e9df34f8ff83c33d4"
+                    },
+                    {
+                        "score": -0.09,
+                        "pointer": 20,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "c00d14e1670ec66e5afd2ea0684dc4b0185d4381"
+                    }
+                ],
+                "issueCounter": 5,
+                "score": -1.12,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-response-415": {
+                "description": "415 response should be defined for operations receiving a body (POST, PUT, PATCH)",
+                "issues": [
+                    {
+                        "score": -0.11,
+                        "pointer": 16,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "6fb01371cf0e44897ed018bf9bc6d59d3ad61810"
+                    },
+                    {
+                        "score": -0.09,
+                        "pointer": 20,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "8b09ae24babdcac8c0375f607f30d3029b4da332"
+                    }
+                ],
+                "issueCounter": 2,
+                "score": -0.2,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-response-429": {
+                "description": "429 response should be defined for all operations",
+                "issues": [
+                    {
+                        "score": -0.7,
+                        "pointer": 14,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "d4acfec39ebee319c946a2c243501bfbeaab1868"
+                    },
+                    {
+                        "score": -0.12,
+                        "pointer": 18,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "552e7802ef960455767f6c9982d2c57942c23320"
+                    },
+                    {
+                        "score": -0.11,
+                        "pointer": 16,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "e2650643df1f4645647abe965a940363da8cd27c"
+                    },
+                    {
+                        "score": -0.11,
+                        "pointer": 17,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "721390d30a3703984f6f4d97c43383e68215f5c6"
+                    },
+                    {
+                        "score": -0.09,
+                        "pointer": 20,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "c6740049ac76dd40890d3f0917266942e8ca7152"
+                    }
+                ],
+                "issueCounter": 5,
+                "score": -1.12,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-response-default-undefined": {
+                "description": "No default response defined for the operation",
+                "issues": [
+                    {
+                        "score": -0.7,
+                        "pointer": 14,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "c91c2f2f619a9c4d2afac09a0e32e763e2be65b6"
+                    },
+                    {
+                        "score": -0.12,
+                        "pointer": 18,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "297dbc19dcc0c6e0382f3552eb3ca0e5efcbcb5d"
+                    },
+                    {
+                        "score": -0.11,
+                        "pointer": 16,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "4d18b03f276e233429243225e84ae6227989617a"
+                    },
+                    {
+                        "score": -0.11,
+                        "pointer": 17,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "3630adf62e1aa309b341aa1f402eb00990c12cb8"
+                    },
+                    {
+                        "score": -0.09,
+                        "pointer": 20,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "f1028864393949260fda576686b86547d3fe750f"
+                    }
+                ],
+                "issueCounter": 5,
+                "score": -1.12,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-schema-request-string-maxlength": {
+                "description": "String schema in a request has no maximum length defined",
+                "issues": [
+                    {
+                        "score": -11.2,
+                        "pointer": 1,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "335b752691a4ce413a462f7cdbc282b365635fd9"
+                    }
+                ],
+                "issueCounter": 1,
+                "score": -11.2,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-schema-request-string-pattern": {
+                "description": "String schema in a request has no pattern defined",
+                "issues": [
+                    {
+                        "score": -16.8,
+                        "pointer": 1,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "0b421bff3e1abc4e11c7a973428dd4b730a9b1be"
+                    },
+                    {
+                        "score": -1.68,
+                        "pointer": 3,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "55955aa21e779b968d02dd513ca4035ad4fcde7f"
+                    },
+                    {
+                        "score": -1.68,
+                        "pointer": 4,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "ba4acbddbe2840eba25cb36bea0719ee700e98d4"
+                    },
+                    {
+                        "score": -1.68,
+                        "pointer": 2,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "1c6f439fa5be4f917e91237f4e174ac826d5a3a2"
+                    },
+                    {
+                        "score": -0.84,
+                        "pointer": 9,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "2b3ac47f6cff5c17503807d9db7920db3e0148c2"
+                    },
+                    {
+                        "score": -0.84,
+                        "pointer": 7,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "8a1032cf0bbc17fc0ae52b2855027a2b0034e4f3"
+                    },
+                    {
+                        "score": -0.84,
+                        "pointer": 8,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "request": true,
+                        "fingerprint": "8fe1e3c42e244ada66b7550c9648734e6a62f0da"
+                    }
+                ],
+                "issueCounter": 7,
+                "score": -24.36,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-schema-response-string-maxlength": {
+                "description": "String schema in a response has no maximum length defined",
+                "issues": [
+                    {
+                        "score": -0.73,
+                        "pointer": 10,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "a30ca678a229171501258d9b32ea812fbaac7ad7"
+                    },
+                    {
+                        "score": -0.73,
+                        "pointer": 11,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "8801f524cf37ee2ea597d3b7a7858ed4f8a461f2"
+                    },
+                    {
+                        "score": -0.73,
+                        "pointer": 12,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "f072a39db2b928fc39fc5a5b73f21e0a4903fe01"
+                    },
+                    {
+                        "score": -0.73,
+                        "pointer": 13,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "caa266b73ac66327c638b4fdf00ed5f3e98cf705"
+                    }
+                ],
+                "issueCounter": 4,
+                "score": -2.91,
+                "criticality": 3,
+                "tooManyError": false
+            },
+            "v3-schema-response-string-pattern": {
+                "description": "String schema in a response has no pattern defined",
+                "issues": [
+                    {
+                        "score": -1.09,
+                        "pointer": 10,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "383973e9f3ce400bece1b20afa1f2a867c790dd6"
+                    },
+                    {
+                        "score": -1.09,
+                        "pointer": 11,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "52923cf2a63561024671a886f907c95f163c012b"
+                    },
+                    {
+                        "score": -1.09,
+                        "pointer": 12,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "c5cfb151143c87926876a8d3d2ae31a5e7bd2ac4"
+                    },
+                    {
+                        "score": -1.09,
+                        "pointer": 13,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "e22f951375e15a30b72eb67c71650a2c584af2c2"
+                    },
+                    {
+                        "score": -0.66,
+                        "pointer": 5,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "6226300508c4b7d7ebce2a838a8069acfae62191"
+                    },
+                    {
+                        "score": -0.66,
+                        "pointer": 6,
+                        "tooManyImpacted": false,
+                        "criticality": 3,
+                        "response": true,
+                        "fingerprint": "9509d76d2091b0ca408b0060115f419e7508c08f"
+                    }
+                ],
+                "issueCounter": 6,
+                "score": -5.68,
+                "criticality": 3,
+                "tooManyError": false
+            }
+        },
+        "subgroupIssueCounter": {
+            "parameters": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "responseHeader": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            },
+            "responseDefinition": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 18,
+                "high": 0,
+                "critical": 0
+            },
+            "schema": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 18,
+                "high": 0,
+                "critical": 0
+            },
+            "paths": {
+                "none": 0,
+                "info": 0,
+                "low": 0,
+                "medium": 0,
+                "high": 0,
+                "critical": 0
+            }
+        }
+    },
+    "issuesKey": [
+        "v3-response-default-undefined",
+        "v3-response-429",
+        "v3-schema-response-string-maxlength",
+        "v3-response-415",
+        "v3-schema-response-string-pattern",
+        "v3-warning-sample-undefined",
+        "v3-response-404",
+        "v3-response-406",
+        "v3-schema-request-string-pattern",
+        "v3-schema-request-string-maxlength"
+    ],
+    "summary": {
+        "oasVersion": "3.0.3",
+        "apiVersion": "1.0.0",
+        "basepath": "",
+        "apiName": "User Service API",
+        "description": "API-first contract for user-service ownership of user data and VIP eligibility.",
+        "endpoints": [
+            "https://user-service.shopping-platform.example"
+        ],
+        "pathCounter": 1,
+        "operationCounter": 5,
+        "parameterCounter": 3,
+        "requestBodyCounter": 2,
+        "schemesCounter": {
+            "https": 5
+        },
+        "requestContentType": {
+            "application/json": 2
+        },
+        "responseContentType": {
+            "application/json": 24
+        },
+        "security": [
+            [
+                "BearerAuth"
+            ]
+        ],
+        "securitySchemes": {
+            "BearerAuth": {
+                "counterInsecure": 0,
+                "counterSecure": 5,
+                "type": "http"
+            }
+        },
+        "componentsSchemasCounter": 5,
+        "componentsResponsesCounter": 5,
+        "componentsParametersCounter": 1,
+        "componentsExamplesCounter": 0,
+        "componentsRequestBodiesCounter": 0,
+        "componentsHeadersCounter": 0,
+        "componentsSecuritySchemesCounter": 1,
+        "componentsLinksCounter": 0,
+        "componentsCallbacksCounter": 0
+    }
+}

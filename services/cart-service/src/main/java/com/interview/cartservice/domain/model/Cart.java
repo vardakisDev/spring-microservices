@@ -4,8 +4,6 @@ import com.interview.cartservice.domain.service.PricingCalculator;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -36,20 +34,26 @@ public final class Cart {
         this.items = new LinkedHashMap<>();
     }
 
-    public static Cart rehydrate(UUID id,
-                                 UUID userId,
-                                 CartType cartType,
-                                 CartStatus status,
-                                 OffsetDateTime createdAt,
-                                 OffsetDateTime updatedAt,
-                                 List<CartItem> items,
-                                 PricingCalculator pricingCalculator) {
-        Cart cart = new Cart(id, userId, cartType, createdAt, pricingCalculator);
-        cart.status = Objects.requireNonNull(status, "status must not be null");
-        cart.updatedAt = Objects.requireNonNull(updatedAt, "updatedAt must not be null");
-        Objects.requireNonNull(items, "items must not be null")
+    public static Cart rehydrate(CartSnapshot snapshot, PricingCalculator pricingCalculator) {
+        Objects.requireNonNull(snapshot, "snapshot must not be null");
+
+        Cart cart = new Cart(snapshot.id(), snapshot.userId(), snapshot.cartType(), snapshot.createdAt(), pricingCalculator);
+        cart.status = Objects.requireNonNull(snapshot.status(), "status must not be null");
+        cart.updatedAt = Objects.requireNonNull(snapshot.updatedAt(), "updatedAt must not be null");
+        Objects.requireNonNull(snapshot.items(), "items must not be null")
                 .forEach(item -> cart.items.put(item.productId(), item.snapshot()));
         return cart;
+    }
+
+    public record CartSnapshot(
+            UUID id,
+            UUID userId,
+            CartType cartType,
+            CartStatus status,
+            OffsetDateTime createdAt,
+            OffsetDateTime updatedAt,
+            List<CartItem> items
+    ) {
     }
 
     public UUID id() {

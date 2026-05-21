@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @RestController
@@ -45,7 +46,7 @@ public class ProductController implements ProductsApi {
         Product product = createProductUseCase.execute(new CreateProductCommand(
                 createProductRequest.getName(),
                 createProductRequest.getDescription(),
-                createProductRequest.getPrice()));
+                toBigDecimal(createProductRequest.getPrice())));
         return ResponseEntity.status(HttpStatus.CREATED).body(toResponse(product));
     }
 
@@ -72,7 +73,7 @@ public class ProductController implements ProductsApi {
         Product product = updateProductUseCase.execute(productId, new UpdateProductCommand(
                 updateProductRequest.getName(),
                 updateProductRequest.getDescription(),
-                updateProductRequest.getPrice()));
+                toBigDecimal(updateProductRequest.getPrice())));
         return ResponseEntity.ok(toResponse(product));
     }
 
@@ -81,9 +82,13 @@ public class ProductController implements ProductsApi {
                 .id(product.id())
                 .name(product.name())
                 .description(product.description())
-                .price(product.price())
+                .price(product.price().doubleValue())
                 .currency(ProductResponse.CurrencyEnum.EUR)
                 .createdAt(product.createdAt())
                 .updatedAt(product.updatedAt());
+    }
+
+    private BigDecimal toBigDecimal(Double value) {
+        return BigDecimal.valueOf(value);
     }
 }

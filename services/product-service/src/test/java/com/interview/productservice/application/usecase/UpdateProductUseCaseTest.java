@@ -39,8 +39,10 @@ class UpdateProductUseCaseTest {
     @Test
     void failsWhenProductDoesNotExist() {
         UpdateProductUseCase updateProductUseCase = new UpdateProductUseCase(productRepository, clock);
+        UUID missingProductId = UUID.randomUUID();
+        UpdateProductCommand command = new UpdateProductCommand("Laptop", "Main product", new BigDecimal("899.99"));
 
-        assertThatThrownBy(() -> updateProductUseCase.execute(UUID.randomUUID(), new UpdateProductCommand("Laptop", "Main product", new BigDecimal("899.99"))))
+        assertThatThrownBy(() -> updateProductUseCase.execute(missingProductId, command))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessageStartingWith("product not found:");
     }
