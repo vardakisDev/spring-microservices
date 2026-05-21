@@ -1,5 +1,6 @@
 package com.interview.cartservice.infrastructure.web;
 
+import com.interview.commonsecurity.CommonSecurityAutoConfiguration;
 import com.interview.cartservice.application.port.out.CartRepositoryPort;
 import com.interview.cartservice.application.port.out.ProductCatalogPort;
 import com.interview.cartservice.application.port.out.PurchaseRepositoryPort;
@@ -15,7 +16,6 @@ import com.interview.cartservice.domain.model.CartType;
 import com.interview.cartservice.domain.model.Purchase;
 import com.interview.cartservice.domain.service.PricingCalculator;
 import com.interview.cartservice.infrastructure.config.LocalJwtSecurityConfiguration;
-import com.interview.cartservice.infrastructure.config.SecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CartController.class)
-@Import({SecurityConfig.class, LocalJwtSecurityConfiguration.class, CartSecurityTest.StubUseCaseConfiguration.class})
+@Import({CommonSecurityAutoConfiguration.class, LocalJwtSecurityConfiguration.class, CartSecurityTest.StubUseCaseConfiguration.class})
 class CartSecurityTest {
 
     @Autowired

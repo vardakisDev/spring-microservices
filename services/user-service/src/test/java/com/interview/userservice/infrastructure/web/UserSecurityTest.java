@@ -1,5 +1,6 @@
 package com.interview.userservice.infrastructure.web;
 
+import com.interview.commonsecurity.CommonSecurityAutoConfiguration;
 import com.interview.userservice.application.port.out.UserRepositoryPort;
 import com.interview.userservice.application.usecase.CreateUserUseCase;
 import com.interview.userservice.application.usecase.DeleteUserUseCase;
@@ -8,7 +9,6 @@ import com.interview.userservice.application.usecase.ListUsersUseCase;
 import com.interview.userservice.application.usecase.UpdateUserUseCase;
 import com.interview.userservice.domain.model.User;
 import com.interview.userservice.infrastructure.config.LocalJwtSecurityConfiguration;
-import com.interview.userservice.infrastructure.config.SecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(UserController.class)
-@Import({SecurityConfig.class, LocalJwtSecurityConfiguration.class, UserSecurityTest.StubUseCaseConfiguration.class})
+@Import({CommonSecurityAutoConfiguration.class, LocalJwtSecurityConfiguration.class, UserSecurityTest.StubUseCaseConfiguration.class})
 class UserSecurityTest {
 
     @Autowired

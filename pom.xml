@@ -18,6 +18,7 @@
     </properties>
 
     <modules>
+        <module>services/common-security</module>
         <module>services/user-service</module>
         <module>services/product-service</module>
         <module>services/cart-service</module>

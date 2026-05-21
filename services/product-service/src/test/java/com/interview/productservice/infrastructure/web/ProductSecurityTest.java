@@ -1,5 +1,6 @@
 package com.interview.productservice.infrastructure.web;
 
+import com.interview.commonsecurity.CommonSecurityAutoConfiguration;
 import com.interview.productservice.application.port.out.ProductRepositoryPort;
 import com.interview.productservice.application.usecase.CreateProductUseCase;
 import com.interview.productservice.application.usecase.DeleteProductUseCase;
@@ -8,7 +9,6 @@ import com.interview.productservice.application.usecase.ListProductsUseCase;
 import com.interview.productservice.application.usecase.UpdateProductUseCase;
 import com.interview.productservice.domain.model.Product;
 import com.interview.productservice.infrastructure.config.LocalJwtSecurityConfiguration;
-import com.interview.productservice.infrastructure.config.SecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ProductController.class)
-@Import({SecurityConfig.class, LocalJwtSecurityConfiguration.class, ProductSecurityTest.StubUseCaseConfiguration.class})
+@Import({CommonSecurityAutoConfiguration.class, LocalJwtSecurityConfiguration.class, ProductSecurityTest.StubUseCaseConfiguration.class})
 class ProductSecurityTest {
 
     @Autowired

@@ -8,6 +8,16 @@
 		"version": "1.0.0",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "token",
+                "value": "{{bearerToken}}",
+                "type": "string"
+            }
+        ]
+    },
 	"item": [
 	        {
 	            "name": "PurchaseHistory",
@@ -404,7 +414,12 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "https://cart-service.shopping-platform.example",
+            "value": "http://localhost:18080",
+            "type": "string"
+        },
+        {
+            "key": "bearerToken",
+            "value": "",
 			"type": "string"
         }
 	]
