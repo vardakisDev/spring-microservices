@@ -1,35 +1,30 @@
 package com.interview.userservice.infrastructure.web;
 
-import com.interview.userservice.api.model.ErrorResponse;
 import com.interview.userservice.application.exception.ConflictException;
 import com.interview.userservice.application.exception.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
+import com.interview.commonsecurity.AbstractGlobalExceptionHandler;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.OffsetDateTime;
+import java.util.Map;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends AbstractGlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    ResponseEntity<ErrorResponse> handleNotFound(ResourceNotFoundException exception) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error("USER_NOT_FOUND", exception.getMessage()));
+    ResponseEntity<Map<String, Object>> handleNotFound(ResourceNotFoundException exception) {
+        return notFound("USER_NOT_FOUND", exception);
     }
 
     @ExceptionHandler(ConflictException.class)
-    ResponseEntity<ErrorResponse> handleConflict(ConflictException exception) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(error("USER_CONFLICT", exception.getMessage()));
+    ResponseEntity<Map<String, Object>> handleConflict(ConflictException exception) {
+        return conflict("USER_CONFLICT", exception);
     }
 
     @ExceptionHandler({IllegalArgumentException.class, MethodArgumentNotValidException.class})
-    ResponseEntity<ErrorResponse> handleBadRequest(Exception exception) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error("BAD_REQUEST", exception.getMessage()));
-    }
-
-    private ErrorResponse error(String code, String message) {
-        return new ErrorResponse().code(code).message(message).timestamp(OffsetDateTime.now());
+    ResponseEntity<Map<String, Object>> handleBadRequest(Exception exception) {
+        return badRequest(exception);
     }
 }
