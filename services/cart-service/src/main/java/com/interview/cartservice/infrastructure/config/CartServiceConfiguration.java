@@ -36,13 +36,31 @@ public class CartServiceConfiguration {
     }
 
     @Bean
-    RestClient userServiceRestClient(@Value("${clients.user-service.base-url}") String baseUrl) {
-        return RestClient.builder().baseUrl(baseUrl).build();
+    RestClient userServiceRestClient(@Value("${clients.user-service.base-url}") String baseUrl,
+                                     ServiceTokenProvider serviceTokenProvider,
+                                     @Value("${app.security.jwt.downstream.user-service-audience}") String audience,
+                                     @Value("${app.security.jwt.downstream.scope}") String scope) {
+        return RestClient.builder()
+                .baseUrl(baseUrl)
+                .requestInterceptor((request, body, execution) -> {
+                    request.getHeaders().setBearerAuth(serviceTokenProvider.createToken(audience, scope));
+                    return execution.execute(request, body);
+                })
+                .build();
     }
 
     @Bean
-    RestClient productServiceRestClient(@Value("${clients.product-service.base-url}") String baseUrl) {
-        return RestClient.builder().baseUrl(baseUrl).build();
+    RestClient productServiceRestClient(@Value("${clients.product-service.base-url}") String baseUrl,
+                                        ServiceTokenProvider serviceTokenProvider,
+                                        @Value("${app.security.jwt.downstream.product-service-audience}") String audience,
+                                        @Value("${app.security.jwt.downstream.scope}") String scope) {
+        return RestClient.builder()
+                .baseUrl(baseUrl)
+                .requestInterceptor((request, body, execution) -> {
+                    request.getHeaders().setBearerAuth(serviceTokenProvider.createToken(audience, scope));
+                    return execution.execute(request, body);
+                })
+                .build();
     }
 
     @Bean

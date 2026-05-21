@@ -23,6 +23,9 @@ services:
       DB_URL: jdbc:postgresql://postgres:5432/user_service
       DB_USERNAME: user_service
       DB_PASSWORD: user_service
+      JWT_ISSUER: shopping-platform-local
+      JWT_SECRET: shopping-platform-local-signing-secret-2026
+      JWT_AUDIENCE: user-service
     depends_on:
       postgres:
         condition: service_healthy
@@ -43,6 +46,9 @@ services:
       DB_URL: jdbc:postgresql://postgres:5432/product_service
       DB_USERNAME: product_service
       DB_PASSWORD: product_service
+      JWT_ISSUER: shopping-platform-local
+      JWT_SECRET: shopping-platform-local-signing-secret-2026
+      JWT_AUDIENCE: product-service
     depends_on:
       postgres:
         condition: service_healthy
@@ -65,6 +71,12 @@ services:
       DB_PASSWORD: cart_service
       USER_SERVICE_BASE_URL: http://user-service:8081
       PRODUCT_SERVICE_BASE_URL: http://product-service:8082
+      JWT_ISSUER: shopping-platform-local
+      JWT_SECRET: shopping-platform-local-signing-secret-2026
+      JWT_AUDIENCE: cart-service
+      USER_SERVICE_JWT_AUDIENCE: user-service
+      PRODUCT_SERVICE_JWT_AUDIENCE: product-service
+      INTERNAL_SERVICE_SCOPE: internal.read
     depends_on:
       postgres:
         condition: service_healthy

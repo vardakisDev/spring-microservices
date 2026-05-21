@@ -10,7 +10,8 @@ go beyond compilation and unit tests:
 
 ### 42Crunch
 
-Status: not yet executed in this repository session.
+Status: in progress. Contract hardening has been applied, but the final audited
+100 score still needs to be confirmed and recorded.
 
 What is already in place:
 
@@ -18,6 +19,8 @@ What is already in place:
 - Bearer authentication schemes are defined in the contracts
 - explicit `401` and `403` responses are defined
 - request validation and shared error schemas are present
+- runtime bearer JWT enforcement now exists in cart-service, user-service, and
+  product-service
 
 What is still required:
 
@@ -54,7 +57,7 @@ Before running the audit, confirm the contracts still satisfy these basics:
 
 ## Sonar
 
-Status: partially set up.
+Status: executed successfully, with a passing quality gate.
 
 What is already in place:
 
@@ -63,12 +66,13 @@ What is already in place:
   and excludes generated sources from analysis
 - a helper script is available at `scripts/run-sonar.sh`
 - the project builds and the multi-module tests pass
+- a Sonar analysis has been run and the quality gate passed
 
 What is still required:
 
 - point the scan at a real SonarQube or SonarCloud instance
 - provide a real project key and token
-- run the analysis and review findings
+- rerun the analysis when new changes need to be re-evaluated
 - decide whether to add project-specific Sonar rules, exclusions, or quality
   gate documentation
 

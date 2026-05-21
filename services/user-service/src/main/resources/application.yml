@@ -18,3 +18,9 @@ spring:
 server:
   port: ${SERVER_PORT:8081}
   shutdown: graceful
+app:
+  security:
+    jwt:
+      issuer: ${JWT_ISSUER:shopping-platform-local}
+      secret: ${JWT_SECRET:shopping-platform-local-signing-secret-2026}
+      audience: ${JWT_AUDIENCE:user-service}

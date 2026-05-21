@@ -18,6 +18,17 @@ spring:
 server:
   port: ${SERVER_PORT:8080}
   shutdown: graceful
+app:
+  security:
+    jwt:
+      issuer: ${JWT_ISSUER:shopping-platform-local}
+      secret: ${JWT_SECRET:shopping-platform-local-signing-secret-2026}
+      audience: ${JWT_AUDIENCE:cart-service}
+      token-ttl: ${JWT_TOKEN_TTL:PT5M}
+      downstream:
+        user-service-audience: ${USER_SERVICE_JWT_AUDIENCE:user-service}
+        product-service-audience: ${PRODUCT_SERVICE_JWT_AUDIENCE:product-service}
+        scope: ${INTERNAL_SERVICE_SCOPE:internal.read}
 clients:
   user-service:
     base-url: ${USER_SERVICE_BASE_URL:http://localhost:8081}
