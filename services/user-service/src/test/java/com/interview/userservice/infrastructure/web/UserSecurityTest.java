@@ -28,6 +28,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -101,9 +103,13 @@ class UserSecurityTest {
 
         @Bean
         UserRepositoryPort userRepositoryPort() {
+            Set<UUID> deletedUserIds = ConcurrentHashMap.newKeySet();
             return new UserRepositoryPort() {
                 @Override
                 public Optional<User> findById(UUID userId) {
+                    if (deletedUserIds.contains(userId)) {
+                        return Optional.empty();
+                    }
                     OffsetDateTime now = OffsetDateTime.now();
                     return Optional.of(new User(userId, "john@example.com", "John", "Doe", true, now, now));
                 }
@@ -126,6 +132,7 @@ class UserSecurityTest {
 
                 @Override
                 public void deleteById(UUID userId) {
+                    deletedUserIds.add(userId);
                 }
             };
         }

@@ -37,6 +37,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -118,9 +120,13 @@ class CartSecurityTest {
 
         @Bean
         CartRepositoryPort cartRepositoryPort() {
+            Set<UUID> deletedCartIds = ConcurrentHashMap.newKeySet();
             return new CartRepositoryPort() {
                 @Override
                 public Optional<Cart> findById(UUID cartId) {
+                    if (deletedCartIds.contains(cartId)) {
+                        return Optional.empty();
+                    }
                     return Optional.of(new Cart(cartId, UUID.randomUUID(), CartType.NORMAL, OffsetDateTime.now(), new PricingCalculator()));
                 }
 
@@ -131,6 +137,7 @@ class CartSecurityTest {
 
                 @Override
                 public void deleteById(UUID cartId) {
+                    deletedCartIds.add(cartId);
                 }
             };
         }

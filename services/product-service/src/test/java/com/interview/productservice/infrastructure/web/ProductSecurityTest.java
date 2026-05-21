@@ -29,6 +29,8 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -102,9 +104,13 @@ class ProductSecurityTest {
 
         @Bean
         ProductRepositoryPort productRepositoryPort() {
+            Set<UUID> deletedProductIds = ConcurrentHashMap.newKeySet();
             return new ProductRepositoryPort() {
                 @Override
                 public Optional<Product> findById(UUID productId) {
+                    if (deletedProductIds.contains(productId)) {
+                        return Optional.empty();
+                    }
                     OffsetDateTime now = OffsetDateTime.now();
                     return Optional.of(new Product(productId, "Laptop", "Main product", new BigDecimal("10.00"), now, now));
                 }
@@ -127,6 +133,7 @@ class ProductSecurityTest {
 
                 @Override
                 public void deleteById(UUID productId) {
+                    deletedProductIds.add(productId);
                 }
             };
         }
